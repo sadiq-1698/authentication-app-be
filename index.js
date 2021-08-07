@@ -6,8 +6,9 @@ const cors = require("cors");
 const dotenv = require("dotenv");
 dotenv.config();
 
-const imageRoutes = require("./routes/image");
-const galleryRoutes = require("./routes/gallery");
+const userRoutes = require("./routes/user");
+const conversationRoutes = require("./routes/conversation");
+const messageRoutes = require("./routes/message");
 
 mongoose.connect(process.env.MONGO_URL, {
   useNewUrlParser: true,
@@ -24,8 +25,9 @@ app.use(
   })
 );
 
-app.use("/image", imageRoutes);
-app.use("/gallery", galleryRoutes);
+app.use("/user", userRoutes);
+app.use("/conversation", conversationRoutes);
+app.use("/message", messageRoutes);
 
 app.get("/", function(_, res) {
   res.send("This application is live!");
