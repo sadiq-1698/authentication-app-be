@@ -106,6 +106,8 @@ exports.edit_profile = async (req, res) => {
       return sendResponse(res, 404, "User does not exist");
     }
 
+    const _password = await bcrypt.hash(formBody.password, BCRYPT_SALT_ROUNDS);
+
     await userModel.findById(req.user.id, (err, updatedDetails) => {
       if (err) return sendResponse(res, 401, "Error updating details");
 
@@ -114,6 +116,7 @@ exports.edit_profile = async (req, res) => {
       });
 
       updatedDetails.profilePhoto = secureImageURL;
+      updatedDetails.password = _password;
       updatedDetails.save();
 
       let userInfo = {};
