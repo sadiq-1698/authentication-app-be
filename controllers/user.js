@@ -132,7 +132,6 @@ exports.edit_profile = async (req, res) => {
       });
     });
   } catch (error) {
-    console.log(error);
     return sendResponse(res, 404, error);
   }
 };
